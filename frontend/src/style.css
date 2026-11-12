@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+:root { font-family: 'DM Sans', 'Noto Sans KR', sans-serif; color: #292820; background: #f7f6f1; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; border: 0; }
+.app-shell { max-width: 1050px; margin: 0 auto; padding: 0 28px; }
+.topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e8e5dc; }
+.brand { color: #292820; text-decoration: none; font-weight: 700; font-size: 21px; letter-spacing: -1px; }
+.brand span { color: #b47b50; }
+.topbar-note, .muted { color: #8a887e; font-size: 13px; }
+.hero { display: flex; align-items: end; justify-content: space-between; padding: 65px 0 42px; }
+.eyebrow { color: #a2744e; font-size: 10px; font-weight: 700; letter-spacing: 2px; margin: 0 0 13px; }
+h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.22; letter-spacing: -2.5px; margin: 0; font-weight: 600; }
+.hero-copy { color: #77766e; margin-top: 18px; font-size: 14px; }
+.add-button, .search-form button, .page-input button, .empty-state button { background: #33372d; color: white; border-radius: 7px; padding: 13px 19px; font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 65px; }
+.stat { background: #eeede6; border-radius: 10px; padding: 19px 22px; display: flex; flex-direction: column; gap: 10px; }
+.stat span { color: #77766e; font-size: 12px; }
+.stat strong { font-size: 27px; font-weight: 600; }
+.stat small { font-size: 13px; margin-left: 4px; color: #77766e; }
+.section-heading, .panel-heading { display: flex; justify-content: space-between; align-items: center; }
+.section-heading { margin-bottom: 22px; }
+.section-heading h2, .panel-heading h2 { font-size: 22px; margin: 0; letter-spacing: -1px; }
+.book-list { display: grid; gap: 14px; }
+.book-card { display: flex; gap: 22px; background: #fff; border: 1px solid #eeece5; border-radius: 11px; padding: 19px; }
+.thumbnail-wrap { width: 90px; flex: 0 0 90px; }
+.thumbnail { width: 90px; height: 125px; object-fit: thumbnail; border-radius: 4px; box-shadow: 0 3px 10px #00000012; }
+.thumbnail-placeholder, .mini-thumbnail { background: #eeece5; border-radius: 4px; height: 125px; display: grid; place-items: center; color: #aaa69a; font-size: 10px; }
+.book-info { flex: 1; min-width: 0; }
+.book-heading { display: flex; justify-content: space-between; gap: 10px; }
+.book-heading h3 { margin: 2px 0 6px; font-size: 17px; }
+.book-heading p { margin: 0 0 21px; }
+.icon-button { background: transparent; color: #99968b; font-size: 25px; line-height: 1; padding: 0 5px; align-self: flex-start; }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
+.progress-label strong { color: #a2744e; }
+.progress-track { height: 7px; border-radius: 10px; background: #eeece5; overflow: hidden; }
+.progress-fill { height: 100%; background: #b88962; border-radius: inherit; transition: width .25s; }
+.page-input { display: flex; align-items: center; gap: 9px; margin-top: 13px; }
+.page-input input { width: 90px; border: 1px solid #e7e4db; border-radius: 6px; padding: 8px; }
+.page-input button { margin-left: auto; padding: 9px 17px; }
+.search-panel { background: #fff; border: 1px solid #e9e6de; border-radius: 11px; padding: 22px; margin: -35px 0 55px; }
+.search-form { display: flex; gap: 9px; margin: 20px 0; }
+.search-form input { flex: 1; min-width: 0; border: 1px solid #e3e0d7; border-radius: 7px; padding: 12px; }
+.search-results { display: grid; gap: 10px; }
+.search-result { display: flex; align-items: center; gap: 13px; padding: 10px 0; border-top: 1px solid #f0eee8; }
+.search-result img, .mini-thumbnail { width: 42px; height: 58px; object-fit: thumbnail; }
+.mini-thumbnail { flex: 0 0 42px; }
+.result-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; font-size: 13px; }
+.search-result button { background: #eeede6; padding: 8px 14px; border-radius: 6px; }
+.empty, .empty-state { text-align: center; padding: 24px; }
+.empty-state { background: #fff; border: 1px dashed #dedbd1; border-radius: 10px; padding: 55px 20px; }
+.empty-icon { font-size: 32px; color: #b88962; }
+.empty-state h3 { font-size: 16px; margin-bottom: 7px; }
+.empty-state p { color: #88867d; font-size: 13px; margin-bottom: 20px; }
+footer { text-align: center; color: #aaa79c; font-size: 9px; letter-spacing: 2px; padding: 65px 0 30px; }
+@media (max-width: 650px) {
+  .app-shell { padding: 0 17px; }
+  .hero { align-items: flex-start; flex-direction: column; gap: 22px; padding: 45px 0 30px; }
+  .stats { gap: 8px; margin-bottom: 45px; }
+  .stat { padding: 14px 12px; }
+  .stat strong { font-size: 22px; }
+  .stat span { font-size: 10px; }
+  .book-card { gap: 14px; padding: 13px; }
+  .thumbnail-wrap, .thumbnail { width: 72px; }
+  .thumbnail-wrap { flex-basis: 72px; }
+  .thumbnail { height: 105px; }
+  .book-heading h3 { font-size: 14px; }
+}
