@@ -1,11 +1,11 @@
 package com.parallelreads.progress.controller;
 
-import com.parallelreads.progress.dto.ProgressResponse;
-import com.parallelreads.progress.dto.ProgressUpdateRequest;
+import com.parallelreads.progress.dto.ReadingProgressResponse;
+import com.parallelreads.progress.dto.ReadingProgressUpdateRequest;
 import com.parallelreads.progress.service.ReadingProgressService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,28 +15,16 @@ public class ReadingProgressController {
 
     private final ReadingProgressService readingProgressService;
 
-    // 최초 등록 전용으로 유지, 프론트에서 등록 여부 구분
-    @PostMapping
-    public ResponseEntity<Void> create(
-            @PathVariable Long bookId,
-            @Valid @RequestBody ProgressUpdateRequest request) {
-        readingProgressService.create(bookId, request.currentPage());
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping
-    public ResponseEntity<Void> update(
-            @PathVariable Long bookId,
-            @Valid @RequestBody ProgressUpdateRequest request
-    ) {
-        readingProgressService.updateCurrentPage(bookId, request.currentPage());
-        return ResponseEntity.noContent().build();
+    // 최초 기록과 수정을 모두 처리
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void save(@PathVariable Long bookId,
+                     @Valid @RequestBody ReadingProgressUpdateRequest request) {
+        readingProgressService.save(bookId, request.currentPage());
     }
 
     @GetMapping
-    public ResponseEntity<ProgressResponse> findProgress(
-            @PathVariable Long bookId
-    ) {
-        return ResponseEntity.ok(readingProgressService.findProgress(bookId));
+    public ReadingProgressResponse findByBookId(@PathVariable Long bookId) {
+        return readingProgressService.findByBookId(bookId);
     }
 }
