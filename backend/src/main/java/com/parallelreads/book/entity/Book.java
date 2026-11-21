@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +27,7 @@ public class Book {
     @Column(length = 500)
     private String authors;
 
-    @Column(length = 500)
+    @Column(length = 255)
     private String publisher;
 
     @Column(columnDefinition = "TEXT")
@@ -38,7 +39,8 @@ public class Book {
     @Column(name = "total_pages")
     private Integer totalPages;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     public Book(String googleBookId,
@@ -58,14 +60,8 @@ public class Book {
         this.totalPages = totalPages;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    // google api 에서 totalPage가 없는 정보를 받아올 경우 사용자가 직접 수정 가능
+    // google api 에서 totalPages 가 없는 정보를 받아올 경우 사용자가 직접 수정 가능
     public void updateTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
     }
-
 }

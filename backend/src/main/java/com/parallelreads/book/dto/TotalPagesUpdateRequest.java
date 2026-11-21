@@ -1,12 +1,13 @@
 package com.parallelreads.book.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
+// BookCreateRequest 와 형식 통일
 public record TotalPagesUpdateRequest(
 
-        @NotNull(message = "현재 페이지를 입력해 주세요.")
-        @Min(value = 0, message = "전체 페이지 수는 0보다 커야 합니다.")
+        @NotNull(message = "총 페이지 수는 필수입니다.")
+        @Positive(message = "총 페이지 수는 0보다 커야 합니다.")
         Integer totalPages
 
 ) {

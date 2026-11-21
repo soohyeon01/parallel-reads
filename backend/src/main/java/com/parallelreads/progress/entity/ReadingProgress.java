@@ -23,16 +23,15 @@ public class ReadingProgress {
     @JoinColumn(name = "book_id", nullable = false, unique = true)
     private Book book;
 
-    @Column(nullable = false)
+    @Column(name = "current_page", nullable = false)
     private int currentPage = 0;
 
     @UpdateTimestamp
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public ReadingProgress(Book book, int currentPage) {
+    public ReadingProgress(Book book) {
         this.book = book;
-        this.currentPage = currentPage;
     }
 
     public void updateCurrentPage(int currentPage) {

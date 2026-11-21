@@ -15,5 +15,18 @@ public record BookResponse(
         Integer totalPages,
         LocalDateTime createdAt
 ) {
-}
 
+    public static BookResponse from(Book book) {
+        return new BookResponse(
+                book.getId(),
+                book.getGoogleBookId(),
+                book.getTitle(),
+                book.getAuthors(),
+                book.getPublisher(),
+                book.getDescription(),
+                book.getThumbnailUrl(),
+                book.getTotalPages(),
+                book.getCreatedAt()
+        );
+    }
+}
