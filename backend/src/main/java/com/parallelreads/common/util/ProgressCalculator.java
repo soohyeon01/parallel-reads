@@ -1,11 +1,12 @@
-package com.parallelreads.progress.calculator;
+package com.parallelreads.common.util;
 
 public final class ProgressCalculator {
 
     private ProgressCalculator() {
     }
 
-    public static Double calculate(Integer currentPage, Integer totalPages) {
+    // 총 페이지 수를 모르면 null
+    public static Double percent(Integer currentPage, Integer totalPages) {
         if (totalPages == null || totalPages <= 0) {
             return null;
         }
