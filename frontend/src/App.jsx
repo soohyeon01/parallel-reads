@@ -62,7 +62,7 @@ export default function App() {
 
       {showSearch && <BookSearch onAdded={loadBooks} onClose={() => setShowSearch(false)} />}
 
-      <section className="library">
+      <section>
         <div className="section-heading">
           <div><p className="eyebrow">MY LIBRARY</p><h2>읽고 있는 책</h2></div>
           <span className="muted">{books.length} books</span>

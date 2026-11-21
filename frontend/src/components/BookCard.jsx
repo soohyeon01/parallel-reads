@@ -1,35 +1,35 @@
-
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   saveProgress,
-  updateProgress,
   updateTotalPages,
   deleteBook
 } from '../api/client'
 
 export default function BookCard({ book, onChanged }) {
-  const [page, setPage] = useState(book.currentPage)
-  const [totalPages, setTotalPages] = useState('')
-  const [busy, setBusy] = useState(false)
+    const [page, setPage] = useState(book.currentPage)
+    useEffect(() => { setPage(book.currentPage) }, [book.currentPage])
+    const [totalPages, setTotalPages] = useState('')
+    const [busy, setBusy] = useState(false)
 
-  async function handleSaveProgress() {
-    setBusy(true)
 
-    /*  이미 데이터가 존재하면 PATCH, 저장된 데이터가 없을 경우 POST */
-    try {
-      if (book.hasProgress) {
-        await updateProgress(book.bookId, page)
-      } else {
-        await saveProgress(book.bookId, page)
+    // handleSaveProgress 전체 교체: POST/PATCH 분기 삭제 + 범위 검사
+    async function handleSaveProgress() {
+      if (page === '' || Number(page) < 0 || Number(page) > book.totalPages) {
+        alert(`0 ~ ${book.totalPages} 사이의 페이지를 입력해 주세요.`)
+        return
       }
 
-      await onChanged()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setBusy(false)
+      setBusy(true)
+
+      try {
+        await saveProgress(book.bookId, page)
+        await onChanged()
+      } catch (error) {
+        alert(error.message)
+      } finally {
+        setBusy(false)
+      }
     }
-  }
 
   async function handleSaveTotalPages() {
     if (!totalPages || Number(totalPages) <= 0) {
@@ -70,7 +70,7 @@ export default function BookCard({ book, onChanged }) {
             alt={`${book.title} 표지`}
           />
         ) : (
-          <div className="thumbnail-placeholder">NO thumbnail</div>
+          <div className="thumbnail-placeholder">NO IMAGE</div>
         )}
       </div>
 

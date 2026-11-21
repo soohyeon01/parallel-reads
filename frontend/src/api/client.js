@@ -23,20 +23,16 @@ export const getDashboard = () => request('/api/dashboard')
 export const searchBooks = (query) =>
   request(`/api/external/books/search?query=${encodeURIComponent(query)}`)
 
-export const addBook = (book) =>
+export const createBook = (book) =>
   request('/api/books', {
-   method: 'POST', body: JSON.stringify(book)
+    method: 'POST',
+    body: JSON.stringify(book)
   })
 
+// 최초 기록과 수정을 모두 처리 (백엔드 PUT upsert)
 export const saveProgress = (bookId, currentPage) =>
   request(`/api/books/${bookId}/progress`, {
-    method: 'POST',
-    body: JSON.stringify({ currentPage: Number(currentPage) })
-  })
-
-export const updateProgress = (bookId, currentPage) =>
-  request(`/api/books/${bookId}/progress`, {
-    method: 'PATCH',
+    method: 'PUT',
     body: JSON.stringify({ currentPage: Number(currentPage) })
   })
 

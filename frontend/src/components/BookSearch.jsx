@@ -1,6 +1,5 @@
-
 import { useState } from 'react'
-import { searchBooks, addBook } from '../api/client'
+import { searchBooks, createBook } from '../api/client'
 
 export default function BookSearch({ onAdded, onClose }) {
   const [query, setQuery] = useState('')
@@ -32,7 +31,7 @@ export default function BookSearch({ onAdded, onClose }) {
     setAddingId(book.googleBookId)
 
     try {
-      await addBook(book)
+      await createBook(book)
       await onAdded()
       onClose()
     } catch (error) {
