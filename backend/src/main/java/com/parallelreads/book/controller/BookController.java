@@ -7,7 +7,6 @@ import com.parallelreads.book.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +24,8 @@ public class BookController {
     }
 
     @GetMapping("/{bookId}")
-    public ResponseEntity<BookResponse> findById(@PathVariable Long bookId) {
-        return ResponseEntity.ok(bookService.findById(bookId));
+    public BookResponse findById(@PathVariable Long bookId) {
+        return bookService.findById(bookId);
     }
 
     @PostMapping
@@ -35,18 +34,16 @@ public class BookController {
         return bookService.create(request);
     }
 
+    @PatchMapping("/{bookId}/total-pages")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateTotalPages(@PathVariable Long bookId,
+                                 @Valid @RequestBody TotalPagesUpdateRequest request) {
+        bookService.updateTotalPages(bookId, request.totalPages());
+    }
+
     @DeleteMapping("/{bookId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long bookId) {
         bookService.delete(bookId);
-    }
-
-    @PatchMapping("/{bookId}/total-pages")
-    public ResponseEntity<Void> updateTotalPages(
-            @PathVariable Long bookId,
-            @Valid @RequestBody TotalPagesUpdateRequest request
-    ) {
-        bookService.updateTotalPages(bookId, request.totalPages());
-        return ResponseEntity.noContent().build();
     }
 }
